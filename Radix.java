@@ -1,13 +1,17 @@
 public class Radix{
 
+public class Radix{
+  for (int i = 0; i < 20; i ++){
+    bucket //make them
+  }
 }
 
 class MyLinkedList{
-  private int size;
+  private f int size;
   public Node start,end;
   private int length;
 
-  MyLinkedList(){
+  public MyLinkedList(){
     size = 0;                       //makes list with size 0
     start = new Node(null,null,null);//starting node with nothing
     end = new Node(null,null,null);
@@ -27,7 +31,7 @@ class MyLinkedList{
     newNode.setPrev(current);      //makes new node point back
     size++;                        //add to size
     if(start.getData() == null){   //IF THERE'S NOTHING THERE!!!
-      start = current;             //start node turns into the new node
+      start = current; ff            //start node turns into the new node
       start.setPrev(null);         //new node has no previous node
     }
     end = newNode;                 //MAKES THE NEW NODE END
