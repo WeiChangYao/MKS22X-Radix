@@ -1,20 +1,27 @@
 public class Radix{
 
-public class Radix{
+/*public class Radix{
   @SuppressWarnings("unchecked")
   MyLinkedList<Integer>[] buckets = new MyLinkedList[20];
-}
+}*/
+  public static void radixsort(int[]data){
+    
+  }
 
 class MyLinkedList{
-  private f int size;
+  private int size;
   public Node start,end;
   private int length;
 
-  public MyLinkedList(){
+  MyLinkedList(){
     size = 0;                       //makes list with size 0
     start = new Node(null,null,null);//starting node with nothing
     end = new Node(null,null,null);
   }
+
+  public int size(){
+    return size;                   //returns size
+   }
 
   public boolean add(Integer value){
     Node current = start;            //start with start
@@ -26,12 +33,14 @@ class MyLinkedList{
     newNode.setPrev(current);      //makes new node point back
     size++;                        //add to size
     if(start.getData() == null){   //IF THERE'S NOTHING THERE!!!
-      start = current; ff            //start node turns into the new node
+      start = current;             //start node turns into the new node
       start.setPrev(null);         //new node has no previous node
     }
     end = newNode;                 //MAKES THE NEW NODE END
     return true;
   }
+
+
 
   public String toString(){
     String str = "[";             //starts with [
@@ -44,9 +53,24 @@ class MyLinkedList{
         }
       }
       current = current.next();    //move to next node
+
     }
     str += "]";                  //] to close it off
     return str;                  //return the computer's hard work
+  }
+
+  private Node getNthNode(int index){
+    int i = 0;                   //start with 0
+    Node current = start;        //start with start node
+    while (current != null){     //as long as current isn't nothing
+      if (i == index){           //stop when counter is equal to index
+        return current;
+      }
+      current = current.next();  //move on and add to counter
+      i++;
+
+    }
+    return current;              //return current node
   }
 
   public Integer get(int index){
@@ -106,6 +130,7 @@ class MyLinkedList{
   }
   }
 
+
   public void addFirst(Integer value){
     size++;                                //add to size
     Node newNode = new Node(value, start, null); //make new node that points to start
@@ -142,6 +167,9 @@ class MyLinkedList{
     return removeReturn;
     }
   }
+
+
+
   public boolean remove(Integer value){
    if (contains(value) == true){        //sees if the value's there
       if(indexOf(value) == size-1){     //if value is last, removeLast
@@ -198,4 +226,5 @@ class MyLinkedList{
     other.end = new Node(null,null,null); //erasing other list
 
   }
+}
 }
