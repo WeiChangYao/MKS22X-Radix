@@ -3,7 +3,12 @@ public class Radix{
   public static void radixsort(int[]data){
     @SuppressWarnings("unchecked")
     MyLinkedList<Integer>[] buckets = new MyLinkedList[20];
-    
+    int c = 1;
+    while(c < 3){ //loops 2 times. remember c++ at the end
+      for(int i = 0; i < data.length; i++){
+        data[i]%10^c
+      }
+    }
   }
 
 class MyLinkedList{
