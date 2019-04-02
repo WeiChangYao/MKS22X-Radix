@@ -1,10 +1,8 @@
 public class Radix{
 
-/*public class Radix{
-  @SuppressWarnings("unchecked")
-  MyLinkedList<Integer>[] buckets = new MyLinkedList[20];
-}*/
   public static void radixsort(int[]data){
+    @SuppressWarnings("unchecked")
+    MyLinkedList<Integer>[] buckets = new MyLinkedList[20];
     
   }
 
