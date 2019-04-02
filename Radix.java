@@ -1,9 +1,8 @@
 public class Radix{
 
 public class Radix{
-  for (int i = 0; i < 20; i ++){
-    bucket //make them
-  }
+  @SuppressWarnings("unchecked")
+  MyLinkedList<Integer>[] buckets = new MyLinkedList[20];
 }
 
 class MyLinkedList{
@@ -16,10 +15,6 @@ class MyLinkedList{
     start = new Node(null,null,null);//starting node with nothing
     end = new Node(null,null,null);
   }
-
-  public int size(){
-    return size;                   //returns size
-   }
 
   public boolean add(Integer value){
     Node current = start;            //start with start
@@ -38,8 +33,6 @@ class MyLinkedList{
     return true;
   }
 
-
-
   public String toString(){
     String str = "[";             //starts with [
     Node current = start;         //start with first node
@@ -51,24 +44,9 @@ class MyLinkedList{
         }
       }
       current = current.next();    //move to next node
-
     }
     str += "]";                  //] to close it off
     return str;                  //return the computer's hard work
-  }
-
-  private Node getNthNode(int index){
-    int i = 0;                   //start with 0
-    Node current = start;        //start with start node
-    while (current != null){     //as long as current isn't nothing
-      if (i == index){           //stop when counter is equal to index
-        return current;
-      }
-      current = current.next();  //move on and add to counter
-      i++;
-
-    }
-    return current;              //return current node
   }
 
   public Integer get(int index){
