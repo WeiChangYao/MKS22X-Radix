@@ -1,16 +1,25 @@
 public class Radix{
 
-  public static void radixsort(int[]data){
+ /* public static void radixsort(int[]data){
     @SuppressWarnings("unchecked")
     MyLinkedList<Integer>[] buckets = new MyLinkedList[20];
     int c = 1;
     while(c < 3){ //loops 2 times. remember c++ at the end
       for(int i = 0; i < data.length; i++){
-        data[i]%10^c
+        data[i]%10^c;
       }
     }
   }
-
+  */
+  public static int getMax(int[] data, int n){ 
+    int maxNum = data[0];              //takes first thing in data
+      for (int i = 1; i < n; i++){     //compares with other things
+        if (data[i] > maxNum)
+        maxNum = data[i];              //change maxNum
+      }
+    return maxNum;                     //returns biggest
+  } 
+  
 class MyLinkedList{
   private int size;
   public Node start,end;
