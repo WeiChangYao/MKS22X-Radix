@@ -3,12 +3,17 @@ public class Radix{
     int m = getMax(data); //get maxnum for digits
     @SuppressWarnings("unchecked")
     MyLinkedList[] buckets = new MyLinkedList[20];
-    for (int digit = 1; m/digit > 0; digit *= 10) 
-      for(int i = 0; i < data.length; i++){
-        //data[i]%10^c;
-        return;
+    for (int digit = 1; m/digit > 0; digit *= 10){
+      for (int i = 0; i < data.length; i++){
+        if (data[i] < 0){
+          buckets[data[i]/digit % 10 * -1].add( data[i] ); //goes in bucket 0-9
+        }
+        else{
+          buckets[data[i]/digit % 10 + 10].add( data[i] ); //bucket 10-19
+        }
       }
     }
+  }
   
 
   public static int getMax(int[] data){ 
