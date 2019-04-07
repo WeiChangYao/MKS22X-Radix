@@ -3,24 +3,43 @@ import java.util.*;
 public class Radix{
   public static void radixsort(int[]data){
     int m = getMax(data); //get maxnum for digits
-    @SuppressWarnings("unchecked")
-    MyLinkedList[] buckets = new MyLinkedList[19];
+    MyLinkedList[] buckets = new MyLinkedList[20];
+    buckets[0] = new MyLinkedList();
+    buckets[1] = new MyLinkedList();
+    buckets[2] = new MyLinkedList();
+    buckets[3] = new MyLinkedList();
+    buckets[4] = new MyLinkedList();
+    buckets[5] = new MyLinkedList();
+    buckets[6] = new MyLinkedList();
+    buckets[7] = new MyLinkedList();
+    buckets[8] = new MyLinkedList();
+    buckets[9] = new MyLinkedList();
+    buckets[10] = new MyLinkedList();
+    buckets[11] = new MyLinkedList();
+    buckets[12] = new MyLinkedList();
+    buckets[13] = new MyLinkedList();
+    buckets[14] = new MyLinkedList();
+    buckets[15] = new MyLinkedList();
+    buckets[16] = new MyLinkedList();
+    buckets[17] = new MyLinkedList();
+    buckets[18] = new MyLinkedList();
+    buckets[19] = new MyLinkedList();
     for (int digit = 1; m/digit > 0; digit *= 10){
       for (int i = 0; i < data.length; i++){
         if (data[i] < 0){
-          buckets[data[i]/digit % 10 * -1].add( data[i] ); //goes in bucket 0-9
+          buckets[((data[i]/digit) % 10 * -1)].add(data[i]); //goes in bucket 0-9
         }
         else{
-          buckets[data[i]/digit % 10 + 10].add( data[i] ); //bucket 10-19
+          buckets[data[i]/digit % 10 + 10].add(data[i]); //bucket 10-19
         }
-        //transfer bucket stuff into data;
-        int combine = 1;
-        while(combine < 20){
-          buckets[0].extend(buckets[combine]);
-        }
-        for(int j = 0; j < data.length; j++){
-          data[j] = buckets[0].removeFirst();
-        }
+      }
+      //transfer bucket stuff into data
+      int combine = 1;
+      while(combine < 20){
+        buckets[0].extend(buckets[combine]);
+      }
+      for(int j = 0; j < data.length; j++){
+        data[j] = buckets[0].removeFirst();
       }
     }
   }
@@ -36,7 +55,7 @@ public class Radix{
   } 
   
 ///////////////////////NODE STUFF///////////////////////
-class Node{
+static class Node{
   private Integer data;
   private Node next,prev;
   public Node(Integer num, Node nextNum, Node prevNum){
@@ -70,12 +89,12 @@ class Node{
   }
 }
 //////////////////MY LINKED LIST////////////////////
-class MyLinkedList{
+static class MyLinkedList{
   private int size;
   public Node start,end;
   private int length;
 
-  MyLinkedList(){
+  public MyLinkedList(){
     size = 0;                       //makes list with size 0
     start = new Node(null,null,null);//starting node with nothing
     end = new Node(null,null,null);
@@ -292,7 +311,14 @@ class MyLinkedList{
   
   
   public static void main(String[]args){
-  System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
+        int[] data = new int[]{-5, 7, 11, 13, 17};
+    radixsort(data);
+    System.out.println("hi");
+    
+    /*    MyLinkedList[] buckets = new MyLinkedList[19];
+        buckets[0].add(2);*/
+    
+ /* System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
   int[]MAX_LIST = {1000000000,500,10};
   for(int MAX : MAX_LIST){
     for(int size = 31250; size < 2000001; size*=2){
@@ -323,7 +349,7 @@ class MyLinkedList{
       System.out.println(size +"\t\t"+MAX+"\t"+1.0*qtime/btime);
     }
     System.out.println();
-  }
+  } */
 }
   
   
