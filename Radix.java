@@ -2,7 +2,7 @@ public class Radix{
   public static void radixsort(int[]data){
     int m = getMax(data); //get maxnum for digits
     @SuppressWarnings("unchecked")
-    MyLinkedList[] buckets = new MyLinkedList[20];
+    MyLinkedList[] buckets = new MyLinkedList[19];
     for (int digit = 1; m/digit > 0; digit *= 10){
       for (int i = 0; i < data.length; i++){
         if (data[i] < 0){
@@ -10,6 +10,14 @@ public class Radix{
         }
         else{
           buckets[data[i]/digit % 10 + 10].add( data[i] ); //bucket 10-19
+        }
+        //transfer bucket stuff into data;
+        int combine = 1;
+        while(combine < 20){
+          buckets[0].extend(buckets[combine]);
+        }
+        for(int j = 0; j < data.length; j++){
+          data[j] = buckets[0].removeFirst();
         }
       }
     }
