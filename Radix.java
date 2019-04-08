@@ -27,18 +27,19 @@ public class Radix{
     for (int digit = 1; m/digit > 0; digit *= 10){
       for (int i = 0; i < data.length; i++){
         if (data[i] < 0){
-          buckets[((data[i]/digit) % 10 * -1)].add(data[i]); //goes in bucket 0-9
+          buckets[((data[i]/digit) % 10 * -1)].addLast(data[i]); //goes in bucket 0-9
         }
         else{
-          buckets[data[i]/digit % 10 + 10].add(data[i]); //bucket 10-19
+          buckets[data[i]/digit % 10 + 10].addLast(data[i]); //bucket 10-19
         }
       }
       //transfer bucket stuff into data
       int combine = 1;
       while(combine < 20){
         buckets[0].extend(buckets[combine]);
+        combine++;
       }
-      for(int j = 0; j < data.length; j++){
+      for(int j = 0; j < buckets[0].size(); j++){
         data[j] = buckets[0].removeFirst();
       }
     }
@@ -298,6 +299,9 @@ static class MyLinkedList{
   }
 
   public void extend(MyLinkedList other){
+    //if(other.size == 0){
+      //return;
+    //}
     this.size = other.size + this.size;  //adds the sizes in this list
     other.size = 0;                       //other list is size 0
     this.end.setNext(other.start);        //points this end to the start of other
@@ -311,14 +315,10 @@ static class MyLinkedList{
   
   
   public static void main(String[]args){
-        int[] data = new int[]{-5, 7, 11, 13, 17};
-    radixsort(data);
-    System.out.println("hi");
-    
     /*    MyLinkedList[] buckets = new MyLinkedList[19];
         buckets[0].add(2);*/
     
- /* System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
+  System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
   int[]MAX_LIST = {1000000000,500,10};
   for(int MAX : MAX_LIST){
     for(int size = 31250; size < 2000001; size*=2){
@@ -349,7 +349,7 @@ static class MyLinkedList{
       System.out.println(size +"\t\t"+MAX+"\t"+1.0*qtime/btime);
     }
     System.out.println();
-  } */
+  } 
 }
   
   
