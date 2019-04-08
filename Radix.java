@@ -4,57 +4,41 @@ public class Radix{
   public static void radixsort(int[]data){
     int m = getMax(data); //get maxnum for digits
     MyLinkedList[] buckets = new MyLinkedList[20];
-    buckets[0] = new MyLinkedList();
-    buckets[1] = new MyLinkedList();
-    buckets[2] = new MyLinkedList();
-    buckets[3] = new MyLinkedList();
-    buckets[4] = new MyLinkedList();
-    buckets[5] = new MyLinkedList();
-    buckets[6] = new MyLinkedList();
-    buckets[7] = new MyLinkedList();
-    buckets[8] = new MyLinkedList();
-    buckets[9] = new MyLinkedList();
-    buckets[10] = new MyLinkedList();
-    buckets[11] = new MyLinkedList();
-    buckets[12] = new MyLinkedList();
-    buckets[13] = new MyLinkedList();
-    buckets[14] = new MyLinkedList();
-    buckets[15] = new MyLinkedList();
-    buckets[16] = new MyLinkedList();
-    buckets[17] = new MyLinkedList();
-    buckets[18] = new MyLinkedList();
-    buckets[19] = new MyLinkedList();
+    for (int c = 0; c < 20; c++){
+      buckets[c] = new MyLinkedList();
+    }
     for (int digit = 1; m/digit > 0; digit *= 10){
       for (int i = 0; i < data.length; i++){
         if (data[i] < 0){
-          buckets[((data[i]/digit) % 10 * -1)].addLast(data[i]); //goes in bucket 0-9
+          buckets[((data[i]/digit) % 10 * -1)].addFirst(data[i]); //goes in bucket 0-9
         }
         else{
-          buckets[data[i]/digit % 10 + 10].addLast(data[i]); //bucket 10-19
+          buckets[data[i]/digit % 10 + 10].addFirst(data[i]); //bucket 10-19  last
         }
       }
       //transfer bucket stuff into data
-      int combine = 1;
+      int combine = 0;
+      MyLinkedList linked = new MyLinkedList();
       while(combine < 20){
-        buckets[0].extend(buckets[combine]);
+        linked.extend(buckets[combine]);
         combine++;
       }
-      for(int j = 0; j < buckets[0].size(); j++){
-        data[j] = buckets[0].removeFirst();
+      for(int j = 0; j < linked.size(); j++){
+        data[j] = linked.removeLast();
       }
     }
   }
-  
 
-  public static int getMax(int[] data){ 
+
+  public static int getMax(int[] data){
     int maxNum = data[0];              //takes first thing in data
       for (int i = 1; i < data.length; i++){     //compares with other things
         if (data[i] > maxNum)
         maxNum = data[i];              //change maxNum
       }
     return maxNum;                     //returns biggest
-  } 
-  
+  }
+
 ///////////////////////NODE STUFF///////////////////////
 static class Node{
   private Integer data;
@@ -223,12 +207,18 @@ static class MyLinkedList{
   }
 
   public void addLast(Integer value){
+    if(size == 0){
+      addFirst(value);
+    }
+    else{
+
     size++;
     Node newNode = new Node(value, null, end); //newNode points to end
     if (end != null){
       end.setNext(newNode);                    //end points back at newNode
     }
     end = newNode;                             //newNode is new end
+  }
   }
 
   public Integer remove(int index){
@@ -267,6 +257,13 @@ static class MyLinkedList{
   }
 
   public Integer removeLast(){
+    if(size == 1){
+      int a = start.getData();
+      Node current = new Node(null,null,null);
+      size--;
+      return a;
+    }
+    else{
     Node current = getNthNode(size-1); //current is last node
     Integer val = current.getData();   //save value
     current = current.prev();      //current is second to last node
@@ -275,18 +272,20 @@ static class MyLinkedList{
     size--;                            //decrease size
     return val;
   }
+  }
 
   public Integer removeFirst(){
     Node current = start;
     Integer val = start.getData();    //save start data
     current = start.next();           //current is second node
+    System.out.println(current);
     current.setPrev(null);            //it points back to nothing
     start = current;                  //it's the new start node
     size--;
     return val;
   }
 
-  public String toBackString(){
+  public String toaString(){
     String str = "";
     Node current = end;         //start with first node
     while (current != null){      //dont stop until you reach the end
@@ -312,12 +311,13 @@ static class MyLinkedList{
 
   }
 }
-  
-  
+
+
   public static void main(String[]args){
     /*    MyLinkedList[] buckets = new MyLinkedList[19];
         buckets[0].add(2);*/
-    
+
+
   System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
   int[]MAX_LIST = {1000000000,500,10};
   for(int MAX : MAX_LIST){
@@ -349,10 +349,21 @@ static class MyLinkedList{
       System.out.println(size +"\t\t"+MAX+"\t"+1.0*qtime/btime);
     }
     System.out.println();
-  } 
+  } /*
+ MyLinkedList a = new MyLinkedList();
+ a.addLast(2);
+ System.out.println(a);
+ a.addFirst(3);
+ System.out.println(a);
+ System.out.println(a.removeLast());
+ //System.out.println(a.removeLast());
+ System.out.println(a);
+ System.out.println(a.removeLast()); */
+
+
 }
-  
-  
-  
-  
+
+
+
+
 }
