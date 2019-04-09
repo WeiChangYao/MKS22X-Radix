@@ -1,5 +1,5 @@
 import java.util.*;
-
+@SuppressWarnings("unchecked")
 public class Radix{
   public static void radixsort(int[]data){
     int size = data.length;
@@ -30,8 +30,6 @@ public class Radix{
       }
     }
   }
-
-
   public static int getMax(int[] data){
     int maxNum = data[0];              //takes first thing in data
       for (int i = 1; i < data.length; i++){     //compares with other things
