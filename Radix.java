@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Radix{
   public static void radixsort(int[]data){
+    int size = data.length;
     int m = getMax(data); //get maxnum for digits
     LinkedList[] buckets = new LinkedList[20];
     for (int c = 0; c < 20; c++){
@@ -21,10 +22,10 @@ public class Radix{
       LinkedList<Integer> linked = new LinkedList<Integer>();
       while(combine < 20){
         linked.addAll(buckets[combine]);
+        buckets[combine].clear();
         combine++;
       }
-      //int k = linked.size();
-      for(int j = 0; j < linked.size(); j++){
+      for(int j = 0; j < size; j++){
         data[j] = linked.remove();
       }
     }
@@ -49,13 +50,13 @@ public class Radix{
   }
   
   public static void main(String[]args){
-    int[] cat = new int[]{6,5,2,12};
+    int[] cat = new int[]{63,13,1,52,2,3};
+    System.out.println(str(cat));
     radixsort(cat);
     System.out.println(str(cat));
 
-/*
   System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
-  int[]MAX_LIST = {1000000000,500,10};
+    int[]MAX_LIST = {1000000000,500,10};
   for(int MAX : MAX_LIST){
     for(int size = 31250; size < 2000001; size*=2){
       long qtime=0;
@@ -85,7 +86,7 @@ public class Radix{
       System.out.println(size +"\t\t"+MAX+"\t"+1.0*qtime/btime);
     }
     System.out.println();
-  }  */
+  }  
 
 
 }
